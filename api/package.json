@@ -5,7 +5,9 @@
 	"type": "commonjs",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "tsx watch ./run.ts"
+		"dev": "tsx watch ./run.ts",
+		"build": "tsc",
+		"start": "node ./dist/run.js"
 	},
 	"author": "",
 	"license": "ISC",
