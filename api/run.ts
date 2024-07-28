@@ -35,7 +35,7 @@ database.once("connected", () => {
 	console.log("Database Connected");
 });
 
-app.get("/", (req, res) => res.json({ message: "Hello World" }));
+app.get("/", (req, res) => res.json({ message: "Hello World from express" }));
 
 app.use("/user", userRouter);
 

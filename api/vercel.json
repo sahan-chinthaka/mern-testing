@@ -2,9 +2,8 @@
 	"version": 2,
 	"builds": [
 		{
-			"src": "*.js",
-			"use": "@vercel/node",
-			"config": { "includeFiles": ["dist/**"] }
+			"src": "./dist/run.js",
+			"use": "@vercel/node"
 		}
 	],
 	"routes": [
