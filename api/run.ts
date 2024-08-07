@@ -20,13 +20,7 @@ if (!mongoString) {
 mongoose.connect(mongoString);
 const database = mongoose.connection;
 
-app.use(
-	cors({
-		origin: ["https://mern-testing-livid.vercel.app"],
-		methods: ["POST", "GET"],
-		credentials: true,
-	})
-);
+app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -34,8 +28,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 database.once("connected", () => {
 	console.log("Database Connected");
 });
-
-app.get("/", (req, res) => res.json({ message: "Hello World from express" }));
 
 app.use("/user", userRouter);
 
