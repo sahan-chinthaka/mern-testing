@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema({
 		required: true,
 		type: String,
 	},
+	isSeller: {
+		required: true,
+		type: Boolean,
+	},
 });
 
 export default mongoose.model("User", userSchema);

@@ -8,6 +8,7 @@ export async function userRegistration(req: Request, res: Response) {
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
 		password: await bcrypt.hash(req.body.password, 10),
+		isSeller: req.body.isSeller,
 	});
 
 	try {
@@ -19,5 +20,5 @@ export async function userRegistration(req: Request, res: Response) {
 			created: false,
 		});
 	}
-	return res.json({ created: true, data: newUser.id });
+	return res.json({ created: true, id: newUser.id });
 }
