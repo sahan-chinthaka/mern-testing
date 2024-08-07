@@ -54,3 +54,25 @@ export async function userLogin(req: Request, res: Response) {
 		token,
 	});
 }
+
+export async function getUser(req: Request, res: Response) {
+	let user;
+
+	try {
+		const email = req.user;
+		user = await User.findOne({ email });
+
+		if (!user) throw new Error("User not found: '" + email + "' with this email");
+	} catch (e: any) {
+		return res.status(500).json({
+			error: e.message,
+			code: e.code,
+		});
+	}
+
+	return res.json({
+		firstName: user.firstName,
+		lastName: user.lastName,
+		isSeller: user.isSeller,
+	});
+}
