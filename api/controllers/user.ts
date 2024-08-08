@@ -76,3 +76,21 @@ export async function getUser(req: Request, res: Response) {
 		isSeller: user.isSeller,
 	});
 }
+
+export async function deleteUser(req: Request, res: Response) {
+	try {
+		await User.deleteOne({
+			email: req.user,
+		});
+	} catch (e: any) {
+		return res.status(500).json({
+			error: e.message,
+			code: e.code,
+			deleted: false,
+		});
+	}
+	
+	return res.json({
+		deleted: true,
+	});
+}
