@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import userRouter from "./routes/user-router";
+import productRouter from "./routes/product-router";
 import mongoose from "mongoose";
 
 dotenv.config();
@@ -30,6 +31,7 @@ database.once("connected", () => {
 });
 
 app.use("/user", userRouter);
+app.use("/products", productRouter);
 
 app.listen(port, () => {
 	console.log(`Server started at ${port}`);
