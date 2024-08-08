@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { addProduct, deleteProduct, updateProduct } from "../controllers/product";
+import { addProduct, deleteProduct, searchProducts, updateProduct } from "../controllers/product";
 import { authenticateToken, fetchUserData, isSeller } from "../middlewares/user";
 
 const router = Router();
+
+router.get("/", searchProducts);
 
 router.use(authenticateToken);
 router.use(fetchUserData);

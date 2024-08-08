@@ -58,3 +58,29 @@ export async function updateProduct(req: Request, res: Response, next: NextFunct
 		updated: true,
 	});
 }
+
+export async function searchProducts(req: Request, res: Response) {
+	const { q } = req.query;
+
+	const rgx = (pattern: string) => new RegExp(`.*${pattern}.*`);
+	const searchRgx = rgx((q as string) ?? "");
+
+	const products = await Product.find({
+		$or: [
+			{
+				title: {
+					$regex: searchRgx,
+					$options: "i",
+				},
+			},
+			{
+				description: {
+					$regex: searchRgx,
+					$options: "i",
+				},
+			},
+		],
+	});
+
+	return res.json({ products });
+}
