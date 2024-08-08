@@ -1,6 +1,6 @@
 import { Router } from "express";
+import { addProduct, deleteProduct, updateProduct } from "../controllers/product";
 import { authenticateToken, fetchUserData, isSeller } from "../middlewares/user";
-import { addProduct, deleteProduct } from "../controllers/product";
 
 const router = Router();
 
@@ -9,5 +9,6 @@ router.use(fetchUserData);
 
 router.post("/", isSeller, addProduct);
 router.delete("/:productId", isSeller, deleteProduct);
+router.put("/:productId", isSeller, updateProduct);
 
 export default router;

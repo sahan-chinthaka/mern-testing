@@ -40,3 +40,21 @@ export async function deleteProduct(req: Request, res: Response, next: NextFunct
 		deleted: true,
 	});
 }
+
+export async function updateProduct(req: Request, res: Response, next: NextFunction) {
+	const { productId } = req.params;
+	const { user, ...rest } = req.body;
+
+	try {
+		await Product.findByIdAndUpdate(productId, rest);
+	} catch (e: any) {
+		return res.status(500).json({
+			error: e.message,
+			code: e.code,
+			updated: false,
+		});
+	}
+	return res.json({
+		updated: true,
+	});
+}
