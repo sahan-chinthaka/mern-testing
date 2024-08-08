@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import Product from "../models/product";
 
 export async function addProduct(req: Request, res: Response) {
@@ -22,4 +22,65 @@ export async function addProduct(req: Request, res: Response) {
 		});
 	}
 	return res.json({ created: true, id: newProduct.id });
+}
+
+export async function deleteProduct(req: Request, res: Response, next: NextFunction) {
+	const { productId } = req.params;
+
+	try {
+		await Product.findByIdAndDelete(productId);
+	} catch (e: any) {
+		return res.status(500).json({
+			error: e.message,
+			code: e.code,
+			deleted: false,
+		});
+	}
+	return res.json({
+		deleted: true,
+	});
+}
+
+export async function updateProduct(req: Request, res: Response, next: NextFunction) {
+	const { productId } = req.params;
+	const { user, ...rest } = req.body;
+
+	try {
+		await Product.findByIdAndUpdate(productId, rest);
+	} catch (e: any) {
+		return res.status(500).json({
+			error: e.message,
+			code: e.code,
+			updated: false,
+		});
+	}
+	return res.json({
+		updated: true,
+	});
+}
+
+export async function searchProducts(req: Request, res: Response) {
+	const { q } = req.query;
+
+	const rgx = (pattern: string) => new RegExp(`.*${pattern}.*`);
+	const searchRgx = rgx((q as string) ?? "");
+
+	const products = await Product.find({
+		$or: [
+			{
+				title: {
+					$regex: searchRgx,
+					$options: "i",
+				},
+			},
+			{
+				description: {
+					$regex: searchRgx,
+					$options: "i",
+				},
+			},
+		],
+	});
+
+	return res.json({ products });
 }
