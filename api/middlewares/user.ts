@@ -57,3 +57,13 @@ export async function isSeller(req: Request, res: Response, next: NextFunction) 
 		});
 	}
 }
+
+export async function isBuyer(req: Request, res: Response, next: NextFunction) {
+	if (req.userData?.isSeller === false) {
+		next();
+	} else {
+		return res.json({
+			message: "Not a buyer",
+		});
+	}
+}

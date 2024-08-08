@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import express from "express";
 import userRouter from "./routes/user-router";
 import productRouter from "./routes/product-router";
+import orderRouter from "./routes/order-router";
 import mongoose from "mongoose";
 
 dotenv.config();
@@ -32,6 +33,7 @@ database.once("connected", () => {
 
 app.use("/user", userRouter);
 app.use("/products", productRouter);
+app.use("/orders", orderRouter);
 
 app.listen(port, () => {
 	console.log(`Server started at ${port}`);
