@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import Product from "../models/product";
 
 export async function addProduct(req: Request, res: Response) {
@@ -22,4 +22,21 @@ export async function addProduct(req: Request, res: Response) {
 		});
 	}
 	return res.json({ created: true, id: newProduct.id });
+}
+
+export async function deleteProduct(req: Request, res: Response, next: NextFunction) {
+	const { productId } = req.params;
+
+	try {
+		await Product.findByIdAndDelete(productId);
+	} catch (e: any) {
+		return res.status(500).json({
+			error: e.message,
+			code: e.code,
+			deleted: false,
+		});
+	}
+	return res.json({
+		deleted: true,
+	});
 }
