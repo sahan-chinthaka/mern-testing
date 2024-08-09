@@ -34,3 +34,20 @@ export async function createOrder(req: Request, res: Response) {
 	}
 	return res.json({ created: true, id: order.id });
 }
+
+export async function getOrders(req: Request, res: Response) {
+	let orders;
+
+	try {
+		orders = await Order.find({
+			user: req.userData?.id,
+		});
+	} catch (e: any) {
+		return res.json({
+			error: e.message,
+			code: e.code,
+		});
+	}
+
+	return res.json({ orders });
+}
