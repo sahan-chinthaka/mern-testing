@@ -34,6 +34,7 @@ main {
 	justify-content: flex-start;
 	flex-wrap: wrap;
 	width: 100%;
+    
 }
 
 .product {
@@ -48,6 +49,7 @@ main {
 	background-color: #eee;
 	position: relative;
 	overflow: hidden;
+    padding-bottom: 20px;
 }
 
 .product > * {
@@ -110,16 +112,29 @@ main {
 	opacity: 1;
 }
 
-.buttons .btn {
+/* .buttons .btn {
 	margin-right: 1rem;
 	background-color: #dddddd;
 	padding: 10px 20px;
 	width: 50%;
 	font-size: 1rem;
 	border-radius: 3px;
-}
+} */
 
 .buttons .btn:hover {
 	background-color: var(--main-color);
 	color: #fff;
 }
+
+.price-and-cart {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	z-index: 1; /* Make sure it has a higher z-index if necessary */
+  }
+  
+  .add-to-cart-btn {
+	z-index: 2; /* Ensure it's above other elements */
+	position: relative;
+  }
+  

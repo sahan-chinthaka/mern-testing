@@ -1,0 +1,43 @@
+.orders-container {
+    margin-top: 50px;
+  }
+  
+  .order-card {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .order-card-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .order-product-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 5px;
+  }
+  
+  .order-details {
+    flex-grow: 1;
+  }
+  
+  .order-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .order-buttons Button {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .order-buttons Button:last-child {
+    margin-right: 0;
+  }
+  
