@@ -17,7 +17,9 @@ interface CartItem extends Product {
 interface CartContextValue {
   cartItems: CartItem[];
   addToCart: (item: CartItem) => void;
-  cartCount: number; 
+  updateItemQuantity: (id: number, delta: number) => void;
+  removeItem: (id: number) => void;
+  cartCount: number;
 }
 
 export const CartContext = createContext<CartContextValue | undefined>(undefined);
@@ -38,13 +40,25 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     });
   };
 
+  const updateItemQuantity = (id: number, delta: number) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item
+      )
+    );
+  };
 
+  const removeItem = (id: number) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+
+  // Calculate cartCount based on cartItems
   const cartCount = useMemo(() => {
     return cartItems.reduce((count, item) => count + item.quantity, 0);
   }, [cartItems]);
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, cartCount }}>
+    <CartContext.Provider value={{ cartItems, addToCart, updateItemQuantity, removeItem, cartCount }}>
       {children}
     </CartContext.Provider>
   );

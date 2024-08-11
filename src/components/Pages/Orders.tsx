@@ -66,8 +66,8 @@ const Orders: React.FC = () => {
                   </div>
                 </div>
                 <div className="order-buttons">
-                  <Button variant="outline-primary" as={Link} to={`/track-order/${order.id}`}>Track Order</Button>
-                  <Button variant="outline-secondary" as={Link} to={`/invoice/${order.id}`}>View Invoice</Button>
+                  <Button variant="outline-primary" as={Link as any} to={`/track-order/${order.id}`}>Track Order</Button>
+                  <Button variant="outline-secondary" as={Link as any} to={`/invoice/${order.id}`}>View Invoice</Button>
                   <Button variant="outline-danger">Cancel Order</Button>
                 </div>
               </Card.Body>
