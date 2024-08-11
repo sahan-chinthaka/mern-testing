@@ -11,7 +11,15 @@ const Cart: React.FC = () => {
     throw new Error("CartContext must be used within a CartProvider");
   }
 
-  const { cartItems } = cartContext;
+  const { cartItems, updateItemQuantity, removeItem } = cartContext;
+
+  const handleQuantityChange = (id: number, delta: number) => {
+    updateItemQuantity(id, delta);
+  };
+
+  const handleRemoveItem = (id: number) => {
+    removeItem(id);
+  };
 
   const getTotalPrice = (): number => {
     return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -28,11 +36,11 @@ const Cart: React.FC = () => {
               <h4>{item.name}</h4>
               <p>${item.price}</p>
               <div className="quantity-control">
-                <Button variant="outline-primary" >-</Button>
+                <Button variant="outline-primary" onClick={() => handleQuantityChange(item.id, -1)}>-</Button>
                 <span>{item.quantity}</span>
-                <Button variant="outline-primary" >+</Button>
+                <Button variant="outline-primary" onClick={() => handleQuantityChange(item.id, 1)}>+</Button>
               </div>
-              <Button variant="outline-danger">Remove</Button>
+              <Button variant="outline-danger" onClick={() => handleRemoveItem(item.id)}>Remove</Button>
             </div>
           </div>
         ))}

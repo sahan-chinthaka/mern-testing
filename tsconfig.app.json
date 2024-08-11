@@ -1,27 +1,20 @@
 {
   "compilerOptions": {
-    "composite": true,
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "moduleDetection": "force",
-    "noEmit": true,
-    "jsx": "react-jsx",
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "target": "ESNext",                         // Modern JavaScript target
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],   // Include DOM library
+    "allowJs": true,                            // Allow JavaScript files to be compiled
+    "skipLibCheck": true,                       // Skip type checking of all declaration files
+    "esModuleInterop": true,                    // Enable interoperability between CommonJS and ES Modules
+    "allowSyntheticDefaultImports": true,       // Allow default imports from modules with no default export
+    "strict": true,                             // Enable strict type-checking options
+    "forceConsistentCasingInFileNames": true,   // Ensure consistent casing in file names
+    "module": "ESNext",                         // Use native ECMAScript modules
+    "moduleResolution": "Node",                 // Resolve modules as Node.js does
+    "resolveJsonModule": true,                  // Include modules imported with .json extension
+    "isolatedModules": true,                    // Ensure TypeScript can safely transpile modules
+    "noEmit": true,                             // Do not emit outputs
+    "jsx": "react-jsx"                          // Enable JSX support for React
   },
-  "include": ["src"]
+  "include": ["src"],                           // Include files in the src directory
+  "exclude": ["node_modules", "**/*.test.tsx"]  // Exclude node_modules and test files
 }
